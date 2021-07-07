@@ -1,5 +1,9 @@
 // Initialising values
-const weather = new Weather('boston', 'usa');
+const storage = new Storage();
+// Get stored location data
+const weatherLocation = storage.getLocationData();
+
+const weather = new Weather(weatherLocation.city, weatherLocation.country);
 const ui = new UI;
 
 // Get weather on DOM load
@@ -11,6 +15,7 @@ document.getElementById('w-change-btn').addEventListener('click', (e) => {
     const country = document.getElementById('country').value;
 
     weather.changeLocation(city, country);
+    storage.setLocationData(city, country);
 
     //Get and display weather
     getWeather();
