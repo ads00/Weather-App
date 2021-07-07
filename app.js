@@ -5,6 +5,20 @@ const ui = new UI;
 // Get weather on DOM load
 document.addEventListener('DOMContentLoaded', getWeather);
 
+// Change Location
+document.getElementById('w-change-btn').addEventListener('click', (e) => {
+    const city = document.getElementById('city').value;
+    const country = document.getElementById('country').value;
+
+    weather.changeLocation(city, country);
+
+    //Get and display weather
+    getWeather();
+
+    // Close modal
+    $('#locModal').modal('hide');
+});
+
 function getWeather() {
     weather.getWeather()
         .then(data => {
@@ -13,32 +27,3 @@ function getWeather() {
         })
         .catch(err => console.log(err));
 }
-
-
-
-// // Search input
-// const w = document.getElementById('searchUser');
-
-// searchUser.addEventListener('keyup', (e) => {
-//     // Get input text
-//     const userText = e.target.value;
-
-//     if(userText !== '') {
-//         ui.clearAlert();
-
-//         github.getUser(userText)
-//             .then(data => {
-//                 if(data.profile.message === 'Not Found') {
-//                     // Show Alert
-//                     ui.showAlert('User not found', 'alert alert-danger');
-//                 } else {
-//                     // Show Profile
-//                     ui.clearAlert();
-//                     ui.showProfile(data.profile);
-//                     ui.showRepos(data.repos);
-//                 }
-//             });
-//     } else {
-//         ui.clearProfile();
-//     }
-// });
